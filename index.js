@@ -19,6 +19,8 @@ document.getElementById('pauseBtn').style.display='none';
 document.getElementById('resumeBtn').style.display='none';
 document.getElementById('replayBtn').style.display='none';
 document.getElementById('quitBtn').style.display='none';
+document.getElementById('left').style.display='none';
+document.getElementById('right').style.display='none';
 
 function start() {
     reset()
@@ -27,7 +29,9 @@ function start() {
     document.getElementById('playBtn').style.display='none';
     document.getElementById('body').style.background='none';
     document.getElementById('quitBtn').style.display='block';
-
+    document.getElementById('buttonClass').style.display='block';
+    document.getElementById('left').style.display='block';
+    document.getElementById('right').style.display='block';
 }
 
 var intervalstop;
@@ -148,6 +152,9 @@ function completed() {
     document.getElementById('pauseBtn').style.display='none';
     document.getElementById('resumeBtn').style.display='none';
     document.getElementById('replayBtn').style.display='block';
+    document.getElementById('buttonClass').style.display='none';
+    document.getElementById('left').style.display='none';
+    document.getElementById('right').style.display='none';
 }
 function callBack() {
     //This function calls the MakeComponents function after every 50ms
@@ -194,6 +201,24 @@ function moveUser(event) {
             break;
     }
 }
+
+function keyClicked(keyname) {
+    switch (keyname) {
+        case "ArrowLeft":
+            //checking collison with user block and box hence used if statement
+            if (user.x > 0) {
+                user.x = user.x - 25;
+            }
+            break;
+        case "ArrowRight":
+            //checking collison with user block and box hence used if statement
+            if (user.x < width - user.width) {
+                user.x = user.x + 25;
+            }
+            break;
+    }
+}
+
 function stopInterval(intervalstop) {
     clearInterval(intervalstop);
 }
@@ -276,7 +301,7 @@ function resumeIt() {
     document.getElementById('pauseBtn').style.display='block';
 }
 function quitIt() {
-    window.location = '/PingPongGame';
+    window.location = '/';
 }
 function forPhone(x) {
     if (x.matches) {
@@ -284,6 +309,8 @@ function forPhone(x) {
       document.getElementById('score').style.width='250px';
     }
   }
+
 var x = window.matchMedia("(max-width: 420px)")
 forPhone(x);
 x.addEventListener('resize',forPhone);
+
