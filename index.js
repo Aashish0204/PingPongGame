@@ -276,7 +276,7 @@ function resumeIt() {
     document.getElementById('pauseBtn').style.display='block';
 }
 function quitIt() {
-    window.location = '/';
+    window.location = '/PingPongGame';
 }
 function forPhone(x) {
     if (x.matches) {
