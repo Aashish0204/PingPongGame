@@ -1,5 +1,10 @@
 body{
     background-color: aliceblue;
+    background: url('images/home_background_1.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    object-fit: cover;
 }
 nav img{
     height: 45px;
@@ -17,8 +22,6 @@ nav a h3{
 }
 
 .container div{
-    margin-left: 10vh;
-    padding: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -37,6 +40,11 @@ nav a h3{
     margin:50px;
 }
 
+.buttonsAndScore{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;align-items: center;
+}
 
 @media only screen and (max-width: 850px) {
     .container{
@@ -48,5 +56,15 @@ nav a h3{
     }
     #score{
         margin: 2vh;
+    }
+    #playBtn{
+        margin-top: 15vh !important;
+    }
+  }
+
+@media only screen and (max-width: 420px) {
+    .buttons button{
+        padding: 5px 20px !important;
+        margin: 8px !important;
     }
   }
