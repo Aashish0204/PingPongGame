@@ -12,10 +12,22 @@ scoreheight = scoreCanvas.getAttribute('height')
 ctx = mycan.getContext('2d')
 scorectx = scoreCanvas.getContext('2d')
 
+//initializing some varaible used further
+var pause=false;
+// making pause and resume btn none initially
+document.getElementById('pauseBtn').style.display='none';
+document.getElementById('resumeBtn').style.display='none';
+document.getElementById('replayBtn').style.display='none';
+document.getElementById('quitBtn').style.display='none';
+
 function start() {
+    reset()
     callBack()
     document.getElementById('score').style.display='block';
     document.getElementById('playBtn').style.display='none';
+    document.getElementById('body').style.background='none';
+    document.getElementById('quitBtn').style.display='block';
+
 }
 
 var intervalstop;
@@ -126,18 +138,42 @@ function MakeComponents() {
 function restart() {
     ball.x = width / 2;
     ball.y = height / 2;
-    ball.vel_Y = ball.vel_Y;
+    ball.vel_Y = -ball.vel_Y;
     ball.speed = 7;
+}
+
+function completed() {
+    document.getElementById('mycanvas').style.display='none';
+    clearInterval(intervalstop);
+    document.getElementById('pauseBtn').style.display='none';
+    document.getElementById('resumeBtn').style.display='none';
+    document.getElementById('replayBtn').style.display='block';
 }
 function callBack() {
     //This function calls the MakeComponents function after every 50ms
+    document.getElementById('mycanvas').style.display='block';
+    document.getElementById('pauseBtn').style.display='block';
     intervalstop = setInterval(() => {
-        MakeComponents()
-        setTimeout(() => {
-            updateBall(intervalstop)
-        }, 2000);
-
-    }, 30);
+        if(user.score == 10  || computer.score == 10){
+            if(user.score==10){
+                alert('You Won');
+                completed();
+            }
+            else{
+                alert("You lost");
+                completed();
+            }
+        }
+        if(pause==true){
+            MakeComponents()
+        }
+        else if(pause==false){
+            setTimeout(() => {
+                MakeComponents()
+                updateBall(intervalstop)
+            }, 30);
+        }
+    }, 40);
 }
 
 function moveUser(event) {
@@ -169,6 +205,15 @@ function moveComp() {
     else if (ball.x + ball.r + 10 > computer.x + computer.width) {
         computer.x = computer.x + 15;
     }
+}
+function reset() {
+    ball.x= width / 2,
+    ball.y= height / 2,
+    user.score=0;
+    computer.score=0;
+    ball.vel_X= 5,
+    ball.vel_Y= 5,
+    document.getElementById('replayBtn').style.display='none';
 }
 function updateBall(intervalstop) {
     //this function is generally used to move the ball and all activities related to collision
@@ -211,14 +256,27 @@ function updateBall(intervalstop) {
         changeDirX()
         updateBall(intervalstop)
     }
-    //once if ball collides with the top or bottom of the table then the game stops
+    //once if ball collides with the top or bottom of the table
     if (ball.y - ball.r <= 0 || ball.y + ball.r >= height) {
+        if(ball.y - ball.r <= 0){user.score++}
+        else{computer.score++}
         restart()
     }
 }
 function pauseIt() {
-
-    clearInterval(intervalstop)
+    // clearInterval(intervalstop)
+    pause=true
+    document.getElementById('pauseBtn').style.display='none';
+    document.getElementById('resumeBtn').style.display='block';
+}
+function resumeIt() {
+    // clearInterval(intervalstop)
+    pause=false
+    document.getElementById('resumeBtn').style.display='none';
+    document.getElementById('pauseBtn').style.display='block';
+}
+function quitIt() {
+    window.location = '/';
 }
 function forPhone(x) {
     if (x.matches) {
