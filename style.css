@@ -13,7 +13,6 @@ nav a h3{
     text-shadow: 1px 1px 2px;
 }
 
-
 .container{
     display: flex;
     height: 88vh;
@@ -39,7 +38,6 @@ nav a h3{
     display: none;
     margin:50px;
 }
-
 .buttonsAndScore{
     display: flex;
     flex-direction: column;
@@ -47,6 +45,7 @@ nav a h3{
 }
 
 @media only screen and (max-width: 850px) {
+
     .container{
         flex-direction: column-reverse;
         justify-content:  flex-end;
@@ -66,5 +65,8 @@ nav a h3{
     .buttons button{
         padding: 5px 20px !important;
         margin: 8px !important;
+    }
+    #mycanvas{
+        margin:0px;
     }
   }
