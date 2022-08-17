@@ -20,7 +20,13 @@
         </a>
     </nav>
     <div class="container">
-        <canvas id="mycanvas" width="400" height="500"></canvas>
+        <div class="d-flex flex-column">
+            <canvas id="mycanvas" width="400" height="500"></canvas>
+            <div id="buttonClass" class="d-flex flex-row">
+                <button id="left" onclick="keyClicked('ArrowLeft')"><img src="images/left.png" alt="left" style="height: 25px;"></button>
+                <button id="right" onclick="keyClicked('ArrowRight')"><img src="images/right.png" alt="right" style="height: 25px;"></button>
+            </div>
+        </div>
         <div class="buttonsAndScore">
             <canvas id="score" width="300" height="150"></canvas>
             <div class="buttons d-flex justify-content-center align-item-center">
